@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+#import django
+#django.setup()
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -21,12 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '6=)#a2roxccf82yh*p1tj4gnj&pl7m%#c4q7kq!&93r0foq^%('
-
+#SECRET_KEY = 'h#0ic^^aziz#xly)%bf@@q(%k_1!md)*qg5$_l=0!tbmq2wxrj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'tasks',
     'users',
+    'rest_framework_swagger',
+    'rest_framework.authtoken'
+    #'provider',
+    #    'provider.oauth2',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -53,6 +57,12 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework.authentication.BasicAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    )
+  }
 ROOT_URLCONF = 'TODO.urls'
 
 TEMPLATES = [
@@ -103,6 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+        'PAGE_SIZE': 1
+        }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -122,3 +135,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+#SECRET_KEY = '8lu*6g0lg)9z!ba+a$ehk)xt)x%rxgb$i1&amp;022shmi1jcgihb*'

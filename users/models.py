@@ -7,7 +7,8 @@ class User(TimeStampedModel):
   name = models.CharField(max_length=128, blank=False)
   username = models.CharField(max_length=128, blank=False, unique=True)
   email = models.EmailField(max_length=128, blank=False)
-  # add password afterwards
+  # encrypt password afterwards
+  password = models.CharField(max_length=128, blank=False, default='rooney')
   verified = models.BooleanField(default=False)
 
   class Meta:

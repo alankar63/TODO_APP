@@ -20,7 +20,7 @@ from rest_framework.routers import DefaultRouter
 
 from users.views import UsersViewSet
 from tasks.views import TasksViewSet
-
+from users import views
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 
@@ -30,4 +30,8 @@ router.register(r'tasks', TasksViewSet, base_name='tasks')
 urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^api/v1/users/$', views.UsersViewSet.as_view()),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
+    #url(r'^oauth2/', include('provider.oauth2.urls', namespace = 'oauth2')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
