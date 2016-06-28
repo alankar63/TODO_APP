@@ -1,0 +1,37 @@
+"""TODO URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.9/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
+
+from django.conf.urls import include, url
+from django.contrib import admin
+from rest_framework.routers import DefaultRouter
+
+from users.views import UsersViewSet
+from tasks.views import TasksViewSet
+from users import views
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+
+router.register(r'users', UsersViewSet, base_name='users')
+router.register(r'tasks', TasksViewSet, base_name='tasks')
+
+urlpatterns = [
+    url(r'^api/v1/', include(router.urls)),
+    url(r'^admin/', admin.site.urls),
+    url(r'^api/v1/users/$', views.UsersViewSet.as_view()),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
+    #url(r'^oauth2/', include('provider.oauth2.urls', namespace = 'oauth2')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+]
